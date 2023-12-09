@@ -1,10 +1,11 @@
 # Importa las bibliotecas y clases necesarias
+import uuid
 from bson import ObjectId
 from flask import render_template, session,flash,request,redirect, url_for,jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app, mongo
 from functools import wraps
-from .forms import CapturaForm
+from .forms import CapturaForm, SignupForm
 import json
 import numpy as np
 import matplotlib
@@ -14,7 +15,7 @@ from io import BytesIO
 import base64
 import random
 import re
-
+from passlib.hash import pbkdf2_sha256
 
 
 db = mongo['pueba_formulario']  # Nombre de la base de datos
@@ -274,11 +275,43 @@ def evaluarowo():
     return render_template('EvaluarUni.html')
 
 #CONFIGURACION CRUD
+
+
 @app.route('/loguearte')
 def loguearte():
     return render_template('login.html')
 
-@app.route('/registerowo')
+@app.route('/signup',methods=['GET'])
 def registerowo():
     return render_template('register.html')
 
+@app.route('/signup/register',methods=['POST'])
+def registeruwu():
+
+    form = SignupForm(request.form)
+   
+      
+# Create the user object
+    user = {
+    "_id": uuid.uuid4().hex,
+    "name": request.form.get('nombre1'),
+    "email": request.form.get('email1'),
+    "password": request.form.get('password1')
+    }
+   
+    # Encrypt the password
+    user['password'] = pbkdf2_sha256.encrypt(user['password'])
+
+    # Check for existing email address
+    if db['users'].find_one({ "email": user['email'] }): 
+            return render_template('fail.html', form=form) 
+
+    if db['users'].insert_one(user):
+            return render_template('exito.html')
+
+
+    return jsonify({ "error": "Signup failed" }), 400
+   
+
+
+    

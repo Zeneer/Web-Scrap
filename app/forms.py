@@ -12,3 +12,8 @@ class CapturaForm(FlaskForm):
 
 class BusquedaForm(FlaskForm):
     nombre_busqueda = StringField('Buscar por Nombre', validators=[InputRequired()])
+
+class SignupForm(FlaskForm):
+    nombre1 = StringField('nombre', validators=[InputRequired()])
+    email1 = StringField('email', validators=[InputRequired()])
+    password1 = StringField('password', validators=[InputRequired()])
