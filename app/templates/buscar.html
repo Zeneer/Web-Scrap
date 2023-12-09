@@ -1,0 +1,58 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+
+{% block title %}Buscar Datos{% endblock %}
+
+{% block content %}
+
+<style>
+
+    .contenedor-buscar{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 30vh;
+        width: 100%;
+    }
+
+    .contenedor-buscar > form > button{
+        background-color: rgb(1, 96, 134);
+        color: white;
+        border-radius:20px;
+        padding: 10px;
+        border-color: white;
+        width: 100px;
+
+    }
+
+    .contenedor-buscar > form > input{
+        width: 35vw;
+        padding: 10px;
+        border-radius:20px;
+        color: black;
+    }
+
+    .contenedor-buscar > form > button:hover{
+        transition-duration: .3s;
+        background-color: black;
+        cursor: pointer;
+
+    }
+
+</style>
+
+<h2>Buscar Universidad</h2>
+
+<div class="contenedor-buscar">
+    <form class="form" method="post" action="{{ url_for('buscar') }}">
+        <label for="valor_busqueda"></label>
+        <input placeholder="Ingresa el nombre de la Universidad" type="text" name="valor_busqueda" required>
+        <button type="submit" class="button">Buscar</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

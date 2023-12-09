@@ -1,0 +1,26 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+
+{% block title %}Buscar Datos{% endblock %}
+
+{% block content %}
+
+    <h2>Buscar Datos</h2>
+    <form method="post" action="{{ url_for('buscar_datos') }}">
+        {{ form.hidden_tag() }}
+        {{ form.nombre_busqueda.label }}
+        {{ form.nombre_busqueda }}
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if datos %}
+        <h2>Resultados de la Búsqueda:</h2>
+        <ul>
+            {% for dato in datos %}
+                <li>{{ dato.nombre }} - {{ dato.edad }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

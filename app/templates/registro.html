@@ -1,0 +1,127 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Registrar Datos{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+
+    .contenedor-form{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+
+    }
+
+    .contenedor-form >form{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
+    }
+
+    .contenedor-form >form > input{
+        border-radius: 20px;
+        width: 25vw;
+        padding: 10px;
+        margin: 5px;
+        color: black;
+    }
+
+    .contenedor-form >form > textarea{
+        border-radius: 20px;
+        width: 25vw;
+        padding: 10px;
+        margin: 5px;
+        color: black;
+        max-width: 25vw;
+        min-height: 4vh;
+    }
+
+    .button{
+        background-color: rgb(1, 96, 134);
+        color: white;
+        padding: 10px;
+        width: 100%;
+
+    }
+
+    .button:hover{
+        transition-duration: .3s;
+        background-color: black;
+        cursor: pointer;
+    }
+
+</style>
+
+<h2>Formulario de Captura</h2>
+
+<div class="contenedor-form">
+    <form class="form" action="/resultadoRegistro" method="post">
+
+        {{ form.csrf_token }}
+
+        <!-- Nombre de universidad -->
+        <label for="universidad_nombre"></label>
+        <input placeholder="Nombre de la universidad" type="text" id="nombre" name="nombre" required>
+
+        <!-- Colonia -->
+        <label for="universidad_colonia"></label>
+        <input placeholder="Colonia:" type="text" id="colonia" name="colonia" required>
+
+        <!-- Calle -->
+        <label for="universidad_calle_numero"></label>
+        <input placeholder="Calle:" type="text" id="calle" name="calle" required>
+
+        <!-- Telefono -->
+        <label for="universidad_telefono1"></label>
+        <input placeholder="Telefono:" type="text" id="telefono" name="telefono" required>
+
+        <!-- Web -->
+        <label for="link_sic"></label>
+        <input placeholder="Pagina Web" type="text" id="pagina_web" name="pagina_web" required>
+
+        <!-- Botón de enviar -->
+        <div style="padding: 10px;">
+            <input style="border-radius: 20px;" type="submit" value="Enviar" class="button">
+        </div>
+    </form>
+</div>
+
+
+
+<h2>Insertar Datos Mediante JSON</h2>
+
+<div>
+    <div class="contenedor-form">
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    
+        {% if mensaje %}
+            <p style="color: green;">{{ mensaje }}</p>
+        {% endif %}
+    
+        <form method="post" action="/resultadoJson">
+            
+            {{ form.csrf_token }}
+            <label for="datos_json"></label>
+            <textarea placeholder="Datos JSON:" name="datos_json" rows="2" cols="50" required></textarea>
+            <br>
+            <label for="nombre_coleccion"></label>
+            <input placeholder="Nombre de la Colección:" type="text" name="nombre_coleccion" required>
+            <br>
+            <div style="padding: 10px;">
+                <input style="border-radius: 20px; margin-bottom: 50px;" class="button" type="submit" value="Insertar Datos">
+            </div>
+            
+        </form>
+    </div>
+</div> 
+
+{% endblock %}

@@ -1,0 +1,40 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Error al registrar los datos{% endblock %}
+
+{% block content %}
+
+<style>
+
+    .cont-button{
+        display: grid;
+        place-items: center;
+    }
+    button {
+        background-color: rgb(1, 96, 134);
+        color: white;
+        border-radius: 20px;
+        padding: 10px;
+        border-color: white;
+        width: 100px;
+        width: auto;
+    }
+
+    button:hover {
+        transition-duration: .3s;
+        background-color: black;
+        cursor: pointer;
+    }
+</style>
+
+<h2>EL NOMBRE INGRESADO NO EXISTE EN NUESTRA BASE DE DATOS</h2>
+
+<div class="cont-button">
+    <button><a href="http://localhost:5000/">INTENTAR DE NUEVO</a></button>
+</div>
+
+
+
+
+{% endblock %}

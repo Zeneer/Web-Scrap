@@ -1,0 +1,47 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Datos de la DB{% endblock %}
+
+{% block content %}
+
+<style>
+
+    .contenedor-cajas{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .contenedor-cajas > div{
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        padding: 20px;
+        border-style: solid;
+        border-color: white;
+        width: 15vw;
+    }
+
+</style>
+
+
+<h2>Datos de la Colección</h2>
+
+<div class="contenedor-cajas">
+        {% for dato in datos %}
+        <div>
+            <h3>{{ dato ['universidad_nombre'] }}</h3>
+            <p style="color: rgb(255, 210, 126); font-weight: bold;">{{ dato['nom_ent']}}</p>
+            <p>{{ dato['universidad_calle_numero']}}</p>
+            <p>{{ dato['universidad_colonia']}}</p>
+            <p>+52{{ dato['universidad_telefono1']}}</p>
+            <p><a style="color: rgb(122, 122, 236);" href="http://{{ dato['pagina_web']}}" target="_blank" rel="">Pagina Web</a></p>
+        </div>
+        {% endfor %}
+</div>
+
+
+
+{% endblock %}

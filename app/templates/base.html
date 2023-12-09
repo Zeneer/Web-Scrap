@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+        }
+
+        body {
+            background-color: #111111;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgb(1, 96, 134);
+            padding: 20px;
+        }
+
+        ul {
+            display: flex;
+            gap: 15px;
+        }
+
+        li {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: rgb(1, 96, 134);
+            display: flex;
+            justify-content: center;
+        }
+
+        .content {
+            padding: 20px;
+            min-height: 82vh;
+        }
+
+        h2{
+            margin-top: 70px;
+            margin-bottom: 70px;
+            font-weight: bold;
+            font-size: 45px;
+            text-align: center;
+        }
+
+    </style>
+
+
+    <nav>
+        <h1>Logo</h1>
+        <ul>
+            <li><a href="/loguearte">Iniciar sesion</a></li>
+            <li><a href="/">Buscar</a></li>
+            <li><a href="/evaluarowo">Evaluar universidad</a></li>
+            <li><a href="/registrarDatos">Registrar Datos</a></li>
+            <li><a href="/mostrarDatos">Mostrar todos los datos</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+
+
+    <footer>
+        <p>&copy; 2023 Web Scraping - logo</p>
+    </footer>
+
+
+</body>
+
+</html>

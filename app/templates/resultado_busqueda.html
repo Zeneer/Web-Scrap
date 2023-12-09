@@ -1,0 +1,96 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Resultado de la Búsqueda{% endblock %}
+
+{% block content %}
+
+<style>
+    .contenedor-busq {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: space-evenly;
+        min-height: 30vh;
+        width: 100%;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .row>div {
+        width: 50%;
+    }
+
+    .row2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+
+
+    h3 {
+        font-size: 25px;
+        color: rgb(238, 255, 0);
+    }
+</style>
+
+<h2>Resultado de la Búsqueda</h2>
+<div class="contenedor-busq">
+
+    <div class="row">
+        <div style="line-height: 40px; margin: 60px;">
+            {% if resultado %}
+            <h3>{{ resultado['universidad_nombre']}}</h3>
+            <p style="color: rgb(255, 210, 126); font-weight: bold;">{{ resultado['nom_ent']}}</p>
+            <p>{{ resultado['universidad_calle_numero']}}</p>
+            <p>{{ resultado['universidad_colonia']}}</p>
+            <p>+52{{ resultado['universidad_telefono1']}}</p>
+            <p><a style="color: rgb(122, 122, 236);" href="http://{{ resultado['pagina_web']}}" target="_blank"
+                    rel="">Pagina Web</a></p>
+
+            {% endif %}
+        </div>
+
+        <div style="text-align: center;">
+            <p>Calificación: {{ calificacion }}</p>
+            <p>Estado de la Universidad: {{ estado_universidad }}</p>
+
+            <!-- Inserta la gráfica en la página HTML -->
+            <img height="400px" width="430px" src="data:image/png;base64,{{ img_encoded }}"
+                alt="Calificación General de la Universidad">
+        </div>
+        
+    </div>
+
+
+    <div class="row2">
+     
+        <p>Nivel de bullyng: {{ estado_bullyng }}</p>
+
+        <!-- Inserta la gráfica en la página HTML -->
+        <img height="320px" width="350px" src="data:image/png;base64,{{ img_encoded1 }}" alt="Indices de bullyng">
+        
+      
+        <p>Nivel de decersion: {{ estado_decersion }}</p>
+        <!-- Inserta la gráfica en la página HTML -->
+        <img height="320px" width="350px" src="data:image/png;base64,{{ img_encoded2 }}"
+        alt="Nivel de decersion">
+
+       
+        <p>Nivel de ingreso: {{ estado_ingreso }}</p>
+        <!-- Inserta la gráfica en la página HTML -->
+        <img height="320px" width="350px" src="data:image/png;base64,{{ img_encoded3 }}"
+        alt="Nivel de ingreso">
+    </div>
+  
+
+</div>
+
+
+
+{% endblock %}
