@@ -275,8 +275,9 @@ def evaluarowo():
     return render_template('EvaluarUni.html')
 
 #CONFIGURACION CRUD
-
-
+@app.route('/registerex')
+def register_exitoso():
+    return render_template('register_exitoso.html')
 @app.route('/loguearte')
 def loguearte():
     return render_template('login.html')
@@ -284,6 +285,10 @@ def loguearte():
 @app.route('/signup',methods=['GET'])
 def registerowo():
     return render_template('register.html')
+
+@app.route('/dashboard')
+def dashboard():
+  return render_template('dashboard.html')
 
 @app.route('/signup/register',methods=['POST'])
 def registeruwu():
@@ -307,11 +312,26 @@ def registeruwu():
             return render_template('fail.html', form=form) 
 
     if db['users'].insert_one(user):
-            return render_template('exito.html')
+            return render_template('/registerex')
 
 
     return jsonify({ "error": "Signup failed" }), 400
    
+#Conexion login
+@app.route('/login/owo', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email1')
+        password = request.form.get('password1')
 
+        # Buscar el usuario en la base de datos por el correo electrónico
+        user = db['users'].find_one({ "email": email})
 
-    
+        if user and pbkdf2_sha256.verify(password, user['password1']):
+            # Iniciar sesión del usuario
+            session['users'] = user['_id']
+            return redirect(url_for('exito.html'))  # Redirigir al panel de control
+        else:
+            return render_template('fail.html', message='Login failed. Invalid email or password.')
+
+    return render_template('login.html')

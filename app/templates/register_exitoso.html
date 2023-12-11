@@ -1,0 +1,21 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+
+{% block title %}Buscar Datos{% endblock %}
+
+{% block content %}
+
+      
+    <div class="">
+
+        <h2 class="center">Your Info</h2>
+  
+        <p>
+          <strong>ID:</strong> {{ session['users']['_id'] }}<br>
+          <strong>Name:</strong> {{ session['users']['name'] }}<br>
+          <strong>Email:</strong> {{ session['users']['email'] }}
+        </p>
+        <p> <a href="/loguearte">Iniciar Sesion</a></p>
+      </div>
+      {% endblock %}

@@ -1,6 +1,10 @@
+from flask import jsonify, redirect, request, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, TextAreaField
 from wtforms.validators import InputRequired, NumberRange
+from app import app, mongo
+from passlib.hash import pbkdf2_sha256
+
 
 class CapturaForm(FlaskForm):
     nombre = StringField('Nombre del usuario', validators=[InputRequired()])
@@ -17,3 +21,4 @@ class SignupForm(FlaskForm):
     nombre1 = StringField('nombre', validators=[InputRequired()])
     email1 = StringField('email', validators=[InputRequired()])
     password1 = StringField('password', validators=[InputRequired()])
+
