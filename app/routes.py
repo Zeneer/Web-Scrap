@@ -276,7 +276,8 @@ def evaluarowo():
 
 #CONFIGURACION CRUD
 @app.route('/registerex')
-def register_exitoso():
+def exitoso():
+
     return render_template('register_exitoso.html')
 @app.route('/loguearte')
 def loguearte():
@@ -290,32 +291,31 @@ def registerowo():
 def dashboard():
   return render_template('dashboard.html')
 
-@app.route('/signup/register',methods=['POST'])
+@app.route('/signup/register', methods=['POST'])
 def registeruwu():
-
     form = SignupForm(request.form)
-   
-      
-# Create the user object
+
+    # Crear el objeto de usuario
     user = {
-    "_id": uuid.uuid4().hex,
-    "name": request.form.get('nombre1'),
-    "email": request.form.get('email1'),
-    "password": request.form.get('password1')
+        "_id": uuid.uuid4().hex,
+        "name": request.form.get('nombre1'),
+        "email": request.form.get('email1'),
+        "password": request.form.get('password1')
     }
-   
-    # Encrypt the password
+
+    # Encriptar la contraseña
     user['password'] = pbkdf2_sha256.encrypt(user['password'])
 
-    # Check for existing email address
-    if db['users'].find_one({ "email": user['email'] }): 
-            return render_template('fail.html', form=form) 
+    # Verificar si la dirección de correo electrónico ya existe
+    existing_user = db['users'].find_one({"email": user['email']})
+    if existing_user:
+        return render_template('fail.html', form=form)
 
-    if db['users'].insert_one(user):
-            return render_template('/registerex')
+    # Insertar el nuevo usuario en la base de datos
+    db['users'].insert_one(user)
 
-
-    return jsonify({ "error": "Signup failed" }), 400
+    # Renderizar la plantilla con la información del usuario registrado
+    return render_template('register_exitoso.html', user=user)
    
 #Conexion login
 @app.route('/login/owo', methods=['GET', 'POST'])

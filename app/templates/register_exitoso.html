@@ -7,15 +7,38 @@
 {% block content %}
 
       
-    <div class="">
+<style>
+    .content {
+        text-align: center;
+        padding: 20px;
+    }
 
-        <h2 class="center">Your Info</h2>
-  
-        <p>
-          <strong>ID:</strong> {{ session['users']['_id'] }}<br>
-          <strong>Name:</strong> {{ session['users']['name'] }}<br>
-          <strong>Email:</strong> {{ session['users']['email'] }}
-        </p>
-        <p> <a href="/loguearte">Iniciar Sesion</a></p>
-      </div>
+    .credential-box {
+        background-color: #645f5f;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        width: 300px;
+        margin: 0 auto; /* Centrar horizontalmente */
+        margin-top: 30px;
+    }
+
+    .credential-box p {
+        margin-bottom: 10px;
+    }
+
+    .credential-box strong {
+        color: #007bff; /* Color azul para resaltar */
+    }
+</style>
+
+<div class="content">
+    <h2>Te registraste correctamente</h2>
+    <div class="credential-box">
+        <p><strong>Nombre:</strong> {{ user.name }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
+    </div>
+    <p><a href="/loguearte">Iniciar Sesión</a></p>
+</div>
       {% endblock %}
