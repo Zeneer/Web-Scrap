@@ -16,6 +16,8 @@ import base64
 import random
 import re
 from passlib.hash import pbkdf2_sha256
+from werkzeug.security import check_password_hash
+from flask_security import check_password_hash
 
 
 db = mongo['pueba_formulario']  # Nombre de la base de datos
@@ -317,7 +319,6 @@ def registeruwu():
     # Renderizar la plantilla con la información del usuario registrado
     return render_template('register_exitoso.html', user=user)
    
-#Conexion login
 @app.route('/login/owo', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -325,13 +326,27 @@ def login():
         password = request.form.get('password1')
 
         # Buscar el usuario en la base de datos por el correo electrónico
-        user = db['users'].find_one({ "email": email})
+        user = db['users'].find_one({"email": email})
 
-        if user and pbkdf2_sha256.verify(password, user['password1']):
+        if user and check_password_hash(user['password'], password):
             # Iniciar sesión del usuario
-            session['users'] = user['_id']
-            return redirect(url_for('exito.html'))  # Redirigir al panel de control
+            session['user'] = {
+                '_id': user['_id'],
+                'name': user['name'],
+                'email': user['email']
+            }
+            return redirect(url_for('exito'))  # Redirigir al panel de control
+       
         else:
-            return render_template('fail.html', message='Login failed. Invalid email or password.')
+            return render_template('fail3.html', message='Login failed. Invalid email or password.')
 
     return render_template('login.html')
+
+# Ruta para el panel de control
+@app.route('/exito')
+def exito():
+    if 'user' in session:
+        print(session['user'])  # Agrega este print para verificar el contenido de 'user'
+        return render_template('exito.html', user=session['user'])
+    else:
+        return redirect(url_for('loguearte'))

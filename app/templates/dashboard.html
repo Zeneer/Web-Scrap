@@ -1,3 +1,4 @@
+<!-- templates/index.html -->
 {% extends 'base.html' %}
 
 
@@ -5,31 +6,39 @@
 
 {% block content %}
 
-<div class="card-wrapper">
+      
+<style>
+    .content {
+        text-align: center;
+        padding: 20px;
+    }
 
-    <div class="card">
+    .credential-box {
+        background-color: #645f5f;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        width: 300px;
+        margin: 0 auto; /* Centrar horizontalmente */
+        margin-top: 30px;
+    }
 
-      <h1 class="center">Dashboard</h1>
-      <p class="center">You are currently logged in.</p>
+    .credential-box p {
+        margin-bottom: 10px;
+    }
 
-      <div class="center">
-        <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
-      </div>
-    
+    .credential-box strong {
+        color: #007bff; /* Color azul para resaltar */
+    }
+</style>
+
+<div class="content">
+    <h2>Iniciaste sesion correctamente</h2>
+    <div class="credential-box">
+        <p><strong>Nombre:</strong> {{ user.name }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
     </div>
-
-    <div class="card">
-
-      <h2 class="center">Your Info</h2>
-
-      <p>
-        <strong>ID:</strong> {{ session['users']['_id'] }}<br>
-        <strong>Name:</strong> {{ session['users']['name'] }}<br>
-        <strong>Email:</strong> {{ session['users']['email'] }}
-      </p>
-    
-    </div>
-  
-  </div>
-
-  {% endblock %}
+    <p><a href="/loguearte">Cerrar Sesion</a></p>
+</div>
+      {% endblock %}
