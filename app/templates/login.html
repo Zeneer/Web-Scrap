@@ -4,18 +4,12 @@
     <title>Login</title>
     
     <style>
-        body {
-            height: 100%;
+        .login-form-container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 142px);
             justify-content: center;
-            flex-direction: column;
-            align-self: center;
-            font-family: Arial, sans-serif;
-            background-color: #111111;
-            margin: 0;
-            padding: 0;
-            display:flex;
-           
-           
+            align-items: center;
         }
 
         form {
@@ -67,7 +61,7 @@
             font-weight: bold;
         }
     </style>
-    <body>
+    <div class='login-form-container'>
         <form method="post" action="/login/owo" name="login_form">
             
             <label for="email">Correo Electrónico:</label>
@@ -81,5 +75,5 @@
 
             <p class="register-link">¿No tienes una cuenta? <a href="/signup">Registrarse</a></p>
         </form>
-    </body>
+    </div>
 {% endblock %}
