@@ -4,19 +4,14 @@
     <title>Login</title>
     
     <style>
-        body {
-            height: 100%;
+        .register-form-container {
+            display: flex;
+            width: 100%;
+            height: calc(100vh - 142px);
             justify-content: center;
-            flex-direction: column;
-            align-self: center;
-            font-family: Arial, sans-serif;
-            background-color: #111111;
-            margin: 0;
-            padding: 0;
-            display:flex;
-           
-           
+            align-items: center;
         }
+
 
         form {
             background-color: #413e3e;
@@ -67,7 +62,7 @@
             font-weight: bold;
         }
     </style>
-    <body>
+    <div class='register-form-container'>
         <form method="post" action="/signup/register" name="signup_form">
           
             <label for="nombre1">Nombre:</label>
@@ -83,5 +78,6 @@
 
             <p class="register-link">¿Ya estas registrado? <a href="/loguearte">Iniciar Sesion</a></p>
         </form>
-    </body>
+    </div>
+    
 {% endblock %}

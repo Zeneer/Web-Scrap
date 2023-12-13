@@ -344,7 +344,7 @@ def login():
 def exito():
     if 'user' in session:
         print(session['user'])  
-        return render_template('exito.html', user=session['user'])
+        return render_template('dashboard.html', user=session['user'])
     else:
         return redirect(url_for('loguearte'))
     
