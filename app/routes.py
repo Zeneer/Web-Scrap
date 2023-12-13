@@ -1,10 +1,8 @@
 # Importa las bibliotecas y clases necesarias
 import uuid
 from bson import ObjectId
-from flask import render_template, session,flash,request,redirect, url_for,jsonify
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import render_template, session , request, redirect, url_for
 from app import app, mongo
-from functools import wraps
 from .forms import CapturaForm, SignupForm
 import json
 import numpy as np
@@ -16,7 +14,6 @@ import base64
 import random
 import re
 from passlib.hash import pbkdf2_sha256
-from werkzeug.security import check_password_hash
 
 
 
@@ -306,7 +303,7 @@ def registeruwu():
     }
 
     # Encriptar la contraseña
-    user['password'] = pbkdf2_sha256.encrypt(user['password'])
+    user['password'] = pbkdf2_sha256.hash(user['password'])
 
     # Verificar si la dirección de correo electrónico ya existe
     existing_user = db['users'].find_one({"email": user['email']})
@@ -319,16 +316,16 @@ def registeruwu():
     # Renderizar la plantilla con la información del usuario registrado
     return render_template('register_exitoso.html', user=user)
    
-@app.route('/login/owo', methods=['GET', 'POST'])
+@app.route('/login/owo', methods=['POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-
+        
         # Buscar el usuario en la base de datos por el correo electrónico
         user = db['users'].find_one({"email": email})
 
-        if user and check_password_hash(user['password'], password):
+        if user and pbkdf2_sha256.verify(password, user['password']):
             # Iniciar sesión del usuario
             session['user'] = {
                 '_id': user['_id'],
