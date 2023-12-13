@@ -1,0 +1,41 @@
+<!-- templates/mostrarEncuesta.html -->
+{% extends 'base.html' %}
+
+{% block title %}Datos de la DB{% endblock %}
+
+{% block content %}
+
+<style>
+    .contenedor-cajas {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .contenedor-cajas > div {
+        display: flex;
+        flex-direction: column;
+        margin: 20px;
+        padding: 20px;
+        border-style: solid;
+        border-color: white;
+        width: 15vw;
+    }
+</style>
+
+<h2>Datos encuesta</h2>
+
+<div class="contenedor-cajas">
+    {% for dato in datos %}
+    <div>
+        <h3>{{ dato['nombre_universidad'] }}</h3>
+        <p>Carga Academica: {{ dato['pregunta3'] }}</p>
+        <p>Orientación académica: {{ dato['pregunta8'] }}</p>
+        <p>Flexibilidad de horarios: {{ dato['pregunta9'] }}</p>
+        <p>Proceso de admision Justo: {{ dato['pregunta18'] }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -2,12 +2,6 @@
 
 {% block content %}
 <style>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        color: black;
-    }
 
     body {
         background-color: #111111;
@@ -23,6 +17,7 @@
         padding: 20px;
         text-align: center;
         width: 70%;
+        color: #111111;
     }
 
     h2 {
@@ -70,179 +65,178 @@
 <body>
 
 <div class="content">
-    <!-- Contenido de la página aquí -->
-    <h2>Selecciona una universidad a evaluar</h2>
-
-    <!-- Agrega una lista desplegable con las universidades de tu base de datos -->
-    <select id="universidad" name="universidad">
-        <option value="universidad1">Universidad 1</option>
-        <option value="universidad2">Universidad 2</option>
-        <!-- Agrega más opciones según tu base de datos -->
-    </select>
-
-    <!-- Agrega el formulario de evaluación aquí -->
+ 
+   <!-- Agrega el formulario de evaluación aquí -->
     <h2>Contesta el formulario de evaluación</h2>
 
     <form action="/enviar_evaluacion" method="post">
+           <!-- Contenido de la página aquí -->
+    <h2>Ingresa el nombre de la Universidad proveniente</h2>
+
+    <label for="encuesta">Universidad:</label>
+</body>
+    <input style="color: #111111;" type="text" id="encuesta" name="encuesta" required>
         <!-- Pregunta 1 -->
         <label for="pregunta1">1. ¿La razón principal para abandonar tus estudios fue:</label>
-        <select id="pregunta1" name="pregunta1">
-            <option value="a">a) Falta de interés en el área de estudio.</option>
-            <option value="b">b) Problemas económicos.</option>
-            <option value="c">c) Compromisos laborales.</option>
+        <select style="color: #111111;" id="pregunta1" name="pregunta1">
+            <option value="Falta de interés en el área de estudio.">a) Falta de interés en el área de estudio.</option>
+            <option value="Problemas económicos. ">b) Problemas económicos.</option>
+            <option value="Compromisos laborales.">c) Compromisos laborales.</option>
         </select>
 
         <!-- Pregunta 2 -->
         <label for="pregunta2">2. ¿En qué año abandonaste la universidad?</label>
-        <select id="pregunta2" name="pregunta2">
-            <option value="a">a) 17-19 años.</option>
-            <option value="b">b) 20-22 años.</option>
-            <option value="c">c) 23-25 años.</option>
+        <select style="color: #111111;" id="pregunta2" name="pregunta2">
+            <option value="17-19 años.">a) 17-19 años.</option>
+            <option value="20-22 años.">b) 20-22 años.</option>
+            <option value="23-25 años.">c) 23-25 años.</option>
         </select>
 
-        <!-- Pregunta 3 -->
-        <label for="pregunta3">3. ¿Consideraste que la carga académica era:</label>
-        <select id="pregunta3" name="pregunta3">
-            <option value="a">a) Manejable.</option>
-            <option value="b">b) Demasiado intensa.</option>
-            <option value="c">c) Apropiada pero desmotivante.</option>
-        </select>
+<!-- Pregunta 3 -->
+<label for="pregunta3">3. ¿Consideraste que la carga académica era:</label>
+<select style="color: #111111;" id="pregunta3" name="pregunta3">
+    <option value="Manejable.">a) Manejable.</option>
+    <option value="Demasiado intensa.">b) Demasiado intensa.</option>
+    <option value="Apropiada pero desmotivante.">c) Apropiada pero desmotivante.</option>
+</select>
 
-        <!-- Pregunta 4 -->
+<!-- Pregunta 4 -->
 <label for="pregunta4">4. ¿La falta de apoyo financiero influyó en tu decisión?</label>
-<select id="pregunta4" name="pregunta4">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) En parte.</option>
+<select style="color: #111111;" id="pregunta4" name="pregunta4">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="En parte.">c) En parte.</option>
 </select>
 
 <!-- Pregunta 5 -->
 <label for="pregunta5">5. ¿Sentiste que las expectativas académicas eran:</label>
-<select id="pregunta5" name="pregunta5">
-    <option value="a">a) Alcanzables.</option>
-    <option value="b">b) Demasiado altas.</option>
-    <option value="c">c) No claramente comunicadas.</option>
+<select style="color: #111111;" id="pregunta5" name="pregunta5">
+    <option value="Alcanzables.">a) Alcanzables.</option>
+    <option value="Demasiado altas.">b) Demasiado altas.</option>
+    <option value="No claramente comunicadas.">c) No claramente comunicadas.</option>
 </select>
 
+<!-- Repite este patrón para las preguntas restantes -->
 <!-- Pregunta 6 -->
 <label for="pregunta6">6. ¿Tuviste dificultades para integrarte socialmente en la universidad?</label>
-<select id="pregunta6" name="pregunta6">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) Neutral.</option>
+<select style="color: #111111;" id="pregunta6" name="pregunta6">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="Neutral.">c) Neutral.</option>
 </select>
 
 <!-- Pregunta 7 -->
 <label for="pregunta7">7. ¿La universidad proporcionó suficientes recursos para el aprendizaje en línea?</label>
-<select id="pregunta7" name="pregunta7">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No aplicable.</option>
+<select style="color: #111111;" id="pregunta7" name="pregunta7">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No aplicable.">c) No aplicable.</option>
 </select>
 
 <!-- Pregunta 8 -->
 <label for="pregunta8">8. ¿Consideras que la orientación académica fue:</label>
-<select id="pregunta8" name="pregunta8">
-    <option value="a">a) Efectiva.</option>
-    <option value="b">b) Insuficiente.</option>
-    <option value="c">c) Inexistente.</option>
+<select style="color: #111111;" id="pregunta8" name="pregunta8">
+    <option value="Efectiva.">a) Efectiva.</option>
+    <option value="Insuficiente.">b) Insuficiente.</option>
+    <option value="Inexistente.">c) Inexistente.</option>
 </select>
 
 <!-- Pregunta 9 -->
 <label for="pregunta9">9. ¿La flexibilidad de horarios académicos fue:</label>
-<select id="pregunta9" name="pregunta9">
-    <option value="a">a) Adecuada.</option>
-    <option value="b">b) Limitada.</option>
-    <option value="c">c) No era relevante.</option>
+<select style="color: #111111;" id="pregunta9" name="pregunta9">
+    <option value="Adecuada.">a) Adecuada.</option>
+    <option value="Limitada.">b) Limitada.</option>
+    <option value="No era relevante.">c) No era relevante.</option>
 </select>
 
 <!-- Pregunta 10 -->
 <label for="pregunta10">10. ¿Te sentiste apoyado por el cuerpo docente?</label>
-<select id="pregunta10" name="pregunta10">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) Varía según los profesores.</option>
+<select style="color: #111111;" id="pregunta10" name="pregunta10">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="Varía según los profesores.">c) Varía según los profesores.</option>
 </select>
-
+<!-- Repite este patrón para las preguntas restantes -->
 <!-- Pregunta 11 -->
 <label for="pregunta11">11. ¿La falta de perspectivas laborales influyó en tu decisión de abandonar?</label>
-<select id="pregunta11" name="pregunta11">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No lo había considerado.</option>
+<select style="color: #111111;" id="pregunta11" name="pregunta11">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No lo había considerado.">c) No lo había considerado.</option>
 </select>
 
 <!-- Pregunta 12 -->
 <label for="pregunta12">12. ¿Hubo cambios significativos en tu vida personal que afectaron tu capacidad para estudiar?</label>
-<select id="pregunta12" name="pregunta12">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No aplica.</option>
+<select style="color: #111111;" id="pregunta12" name="pregunta12">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No aplica.">c) No aplica.</option>
 </select>
 
 <!-- Pregunta 13 -->
 <label for="pregunta13">13. ¿La falta de programas de tutoría o mentoría fue un factor?</label>
-<select id="pregunta13" name="pregunta13">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No lo sé.</option>
+<select style="color: #111111;" id="pregunta13" name="pregunta13">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No lo sé.">c) No lo sé.</option>
 </select>
 
 <!-- Pregunta 14 -->
 <label for="pregunta14">14. ¿Consideras que la infraestructura tecnológica de la universidad fue:</label>
-<select id="pregunta14" name="pregunta14">
-    <option value="a">a) Avanzada.</option>
-    <option value="b">b) Obsoleta.</option>
-    <option value="c">c) No relevante para tu decisión.</option>
+<select style="color: #111111;" id="pregunta14" name="pregunta14">
+    <option value="Avanzada.">a) Avanzada.</option>
+    <option value="Obsoleta.">b) Obsoleta.</option>
+    <option value="No relevante para tu decisión.">c) No relevante para tu decisión.</option>
 </select>
 
 <!-- Pregunta 15 -->
 <label for="pregunta15">15. ¿La universidad ofrecía suficientes oportunidades de prácticas profesionales?</label>
-<select id="pregunta15" name="pregunta15">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No lo exploré.</option>
+<select style="color: #111111;" id="pregunta15" name="pregunta15">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No lo exploré.">c) No lo exploré.</option>
 </select>
+
 <!-- Pregunta 16 -->
 <label for="pregunta16">16. ¿La calidad de vida en el campus fue un factor en tu decisión?</label>
-<select id="pregunta16" name="pregunta16">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No aplica.</option>
+<select style="color: #111111;" id="pregunta16" name="pregunta16">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No aplica.">c) No aplica.</option>
 </select>
 
 <!-- Pregunta 17 -->
 <label for="pregunta17">17. ¿La falta de programas extracurriculares afectó tu experiencia universitaria?</label>
-<select id="pregunta17" name="pregunta17">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No participé en programas extracurriculares.</option>
+<select style="color: #111111;" id="pregunta17" name="pregunta17">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No participé en programas extracurriculares.">c) No participé en programas extracurriculares.</option>
 </select>
 
 <!-- Pregunta 18 -->
 <label for="pregunta18">18. ¿El proceso de admisión fue transparente y justo?</label>
-<select id="pregunta18" name="pregunta18">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No lo sé.</option>
+<select style="color: #111111;"id="pregunta18" name="pregunta18">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No lo sé.">c) No lo sé.</option>
 </select>
 
 <!-- Pregunta 19 -->
 <label for="pregunta19">19. ¿La falta de conexión entre la teoría y la aplicación práctica fue un problema?</label>
-<select id="pregunta19" name="pregunta19">
-    <option value="a">a) Sí.</option>
-    <option value="b">b) No.</option>
-    <option value="c">c) No lo consideré.</option>
+<select style="color: #111111;" id="pregunta19" name="pregunta19">
+    <option value="Sí.">a) Sí.</option>
+    <option value="No.">b) No.</option>
+    <option value="No lo consideré.">c) No lo consideré.</option>
 </select>
 
 <!-- Pregunta 20 -->
 <label for="pregunta20">20. ¿El nivel de exigencia en los exámenes era:</label>
-<select id="pregunta20" name="pregunta20">
-    <option value="a">a) Razonable.</option>
-    <option value="b">b) Demasiado alto.</option>
-    <option value="c">c) No era un problema.</option>
+<select style="color: #111111;" id="pregunta20" name="pregunta20">
+    <option value="Razonable.">a) Razonable.</option>
+    <option value="Demasiado alto.">b) Demasiado alto.</option>
+    <option value="No era un problema.">c) No era un problema.</option>
 </select>
-        <!-- Repite este bloque para las demás preguntas hasta la 20 -->
+
 
         <button type="submit">Enviar Evaluación</button>
     </form>
