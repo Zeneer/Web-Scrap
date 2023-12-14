@@ -1,0 +1,102 @@
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        color: white;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    }
+
+    body {
+        background-color: #111111;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        background-color: rgb(1, 96, 134);
+        padding: 20px;
+    }
+
+    ul {
+        display: flex;
+        gap: 15px;
+    }
+
+    li {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-decoration: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    footer {
+        background-color: rgb(1, 96, 134);
+        display: flex;
+        justify-content: center;
+    }
+
+    .content {
+        padding: 20px;
+        min-height: 82vh;
+    }
+
+    h2{
+        margin-top: 70px;
+        margin-bottom: 70px;
+        font-weight: bold;
+        font-size: 45px;
+        text-align: center;
+    }
+
+</style>
+<nav>
+    <h1>Logo</h1>
+    <ul>
+   
+        <li><a href="/evaluarowo">Evaluar universidad</a></li>
+   
+        <li><a href="/registrarDatos">Registrar Datos</a></li>
+      
+    </ul>
+</nav>
+
+
+      
+<style>
+    .content {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .credential-box {
+        background-color: #645f5f;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        width: 300px;
+        margin: 0 auto; /* Centrar horizontalmente */
+        margin-top: 30px;
+    }
+
+    .credential-box p {
+        margin-bottom: 10px;
+    }
+
+    .credential-box strong {
+        color: #007bff; /* Color azul para resaltar */
+    }
+</style>
+
+<div class="content">
+    <h2>Iniciaste sesion correctamente</h2>
+    <div class="credential-box">
+        <p><strong>Nombre:</strong> {{ user.name }}</p>
+        <p><strong>Correo Electrónico:</strong> {{ user.email }}</p>
+    </div>
+    <p><a href="/loguearte">Cerrar Sesion</a></p>
+</div>

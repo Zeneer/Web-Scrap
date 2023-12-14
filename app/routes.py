@@ -1,10 +1,9 @@
 # Importa las bibliotecas y clases necesarias
+import uuid
 from bson import ObjectId
-from flask import render_template, session,flash,request,redirect, url_for,jsonify
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import render_template, session , request, redirect, url_for
 from app import app, mongo
-from functools import wraps
-from .forms import CapturaForm
+from .forms import CapturaForm, SignupForm
 import json
 import numpy as np
 import matplotlib
@@ -14,6 +13,7 @@ from io import BytesIO
 import base64
 import random
 import re
+from passlib.hash import pbkdf2_sha256
 
 
 
@@ -274,11 +274,127 @@ def evaluarowo():
     return render_template('EvaluarUni.html')
 
 #CONFIGURACION CRUD
+@app.route('/registerex')
+def exitoso():
+
+    return render_template('register_exitoso.html')
 @app.route('/loguearte')
 def loguearte():
     return render_template('login.html')
 
-@app.route('/registerowo')
+@app.route('/signup',methods=['GET'])
 def registerowo():
     return render_template('register.html')
 
+@app.route('/dashboard')
+def dashboard():
+  return render_template('dashboard.html')
+
+@app.route('/signup/register', methods=['POST'])
+def registeruwu():
+    form = SignupForm(request.form)
+
+    # Crear el objeto de usuario
+    user = {
+        "_id": uuid.uuid4().hex,
+        "name": request.form.get('nombre1'),
+        "email": request.form.get('email1'),
+        "password": request.form.get('password1')
+    }
+
+    # Encriptar la contraseña
+    user['password'] = pbkdf2_sha256.hash(user['password'])
+
+    # Verificar si la dirección de correo electrónico ya existe
+    existing_user = db['users'].find_one({"email": user['email']})
+    if existing_user:
+        return render_template('fail.html', form=form)
+
+    # Insertar el nuevo usuario en la base de datos
+    db['users'].insert_one(user)
+
+    # Renderizar la plantilla con la información del usuario registrado
+    return render_template('register_exitoso.html', user=user)
+   
+@app.route('/login/owo', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        # Buscar el usuario en la base de datos por el correo electrónico
+        user = db['users'].find_one({"email": email})
+
+        if user and pbkdf2_sha256.verify(password, user['password']):
+            # Iniciar sesión del usuario
+            session['user'] = {
+                '_id': user['_id'],
+                'name': user['name'],
+                'email': user['email']
+            }
+            return redirect(url_for('exito'))  # Redirigir al panel de control
+       
+        else:
+            return render_template('fail3.html', message='Login failed. Invalid email or password.')
+
+    return render_template('login.html')
+
+# Ruta para el panel de control
+@app.route('/exito')
+def exito():
+    if 'user' in session:
+        print(session['user'])  
+        return render_template('dashboard.html', user=session['user'])
+    else:
+        return redirect(url_for('loguearte'))
+    
+#Configuración evluacion
+
+@app.route('/enviar_evaluacion', methods=['POST'])
+def enviar_evaluacion():
+    # Obtén el nombre de la universidad desde el formulario
+    nombre_universidad = request.form.get('encuesta')
+
+    # Crear un diccionario para almacenar las respuestas
+    respuestas = {
+        'nombre_universidad': nombre_universidad,
+        'pregunta1': request.form.get('pregunta1'),
+        'pregunta2': request.form.get('pregunta2'),
+        'pregunta3': request.form.get('pregunta3'),
+        'pregunta4': request.form.get('pregunta4'),
+        'pregunta5': request.form.get('pregunta5'),
+        'pregunta6': request.form.get('pregunta6'),
+        'pregunta7': request.form.get('pregunta7'),
+        'pregunta8': request.form.get('pregunta8'),
+        'pregunta9': request.form.get('pregunta9'),
+        'pregunta10': request.form.get('pregunta10'),
+        'pregunta11': request.form.get('pregunta11'),
+        'pregunta12': request.form.get('pregunta12'),
+        'pregunta13': request.form.get('pregunta13'),
+        'pregunta14': request.form.get('pregunta14'),
+        'pregunta15': request.form.get('pregunta15'),
+        'pregunta16': request.form.get('pregunta16'),
+        'pregunta17': request.form.get('pregunta17'),
+        'pregunta18': request.form.get('pregunta18'),
+        'pregunta19': request.form.get('pregunta19'),
+        'pregunta20': request.form.get('pregunta20')
+    }
+
+    # Guardar las respuestas en la colección 'encuestas'
+    UWU = db['encuestas']  # Nombre de la colección
+    UWU.insert_one(respuestas)
+
+    # Puedes redirigir a una página de agradecimiento o donde desees
+    return render_template('exito.html', nombre_universidad=nombre_universidad, respuestas=respuestas)
+
+
+@app.route('/mostrarEncuesta')
+def mostrar_encuestas():
+    # Recupera todos los datos de la colección
+    datos = db['encuestas'].find({})
+
+    # Convierte los datos a una lista para pasarlos al template
+    datos_lista = list(datos)
+
+    # Renderiza la plantilla y pasa los datos como argumento
+    return render_template('mostrarEncuesta.html', datos=datos_lista)
