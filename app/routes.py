@@ -1,7 +1,9 @@
 # Importa las bibliotecas y clases necesarias
 import uuid
+from bs4 import BeautifulSoup
 from bson import ObjectId
 from flask import render_template, session , request, redirect, url_for
+import requests
 from app import app, mongo
 from .forms import CapturaForm, SignupForm
 import json
@@ -398,3 +400,40 @@ def mostrar_encuestas():
 
     # Renderiza la plantilla y pasa los datos como argumento
     return render_template('mostrarEncuesta.html', datos=datos_lista)
+
+#SCRAPER
+@app.route('/scraper')
+def scrap():
+  return render_template('scraper.html')
+
+@app.route('/scraper', methods=['GET', 'POST'])
+def scraper():
+    if request.method == 'POST':
+        link = request.form['link']
+        data = scrape_data(link)
+        save_to_mongo(data)
+        return redirect(url_for('mostrar_encuestas'))
+
+    return render_template('scraper.html')
+
+def scrape_data(link):
+    # Implementa tu lógica de scraping aquí, por ejemplo con BeautifulSoup y requests
+    response = requests.get(link)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    # Extrae la información que necesitas del sitio web
+    # Ejemplo: title = soup.title.text
+
+    # Devuelve los datos en un diccionario
+    data = {
+        'link': link,
+        # Agrega más datos según sea necesario
+    }
+
+    return data
+
+def save_to_mongo(data):
+    # Guarda los datos en MongoDB
+    # Ajusta según tu esquema de datos y colección en MongoDB
+    collection = db['scraping']
+    collection.insert_one(data)

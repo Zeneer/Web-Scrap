@@ -1,0 +1,46 @@
+<!-- templates/scraper.html -->
+{% extends 'base.html' %}
+
+{% block title %}Scraper{% endblock %}
+
+{% block content %}
+
+<style>
+    .form-container {
+        margin: 50px auto;
+        width: 50%;
+        text-align: center;
+    }
+
+    input {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Scraper</h2>
+    <form method="post">
+        <label for="link">Enlace:</label>
+        <input type="text" id="link" name="link" required>
+        <br>
+        <button type="submit">Scrapear</button>
+    </form>
+</div>
+
+{% endblock %}
