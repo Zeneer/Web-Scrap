@@ -16,6 +16,9 @@ import base64
 import random
 import re
 from passlib.hash import pbkdf2_sha256
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
 
 
 
@@ -402,10 +405,6 @@ def mostrar_encuestas():
     return render_template('mostrarEncuesta.html', datos=datos_lista)
 
 #SCRAPER
-@app.route('/scraper')
-def scrap():
-  return render_template('scraper.html')
-
 @app.route('/scraper', methods=['GET', 'POST'])
 def scraper():
     if request.method == 'POST':
@@ -417,19 +416,52 @@ def scraper():
     return render_template('scraper.html')
 
 def scrape_data(link):
-    # Implementa tu lógica de scraping aquí, por ejemplo con BeautifulSoup y requests
-    response = requests.get(link)
-    soup = BeautifulSoup(response.text, 'html.parser')
+ # Configuración de Selenium
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36')
 
-    # Extrae la información que necesitas del sitio web
-    # Ejemplo: title = soup.title.text
+    driver = webdriver.Chrome(options=options)
+    # Cargar la página
+    driver.get(link)
+
+    # Esperar a que se cargue el contenido (puedes ajustar el tiempo según sea necesario)
+    driver.implicitly_wait(10)
+
+    # Obtener el contenido de la página después de que JavaScript haya cargado
+    page_source = driver.page_source
+    driver.quit()
+
+    soup = BeautifulSoup(page_source, 'html.parser')
+
+    # Encuentra la información específica que estás buscando
+    universidades_publicas = []
+
+    # Ajusta este código según la estructura HTML de la página
+    # En este ejemplo, se asume que las universidades están en divs con la clase "universidad-card"
+    universidades_divs = soup.find_all('div', class_='universidad-card')
+
+    for universidad_div in universidades_divs:
+        nombre = universidad_div.find('h2').text
+        direccion = universidad_div.find('p', class_='direccion').text
+        telefono = universidad_div.find('p', class_='telefono').text
+
+        universidad_info = {
+            'nombre': nombre,
+            'direccion': direccion,
+            'telefono': telefono
+        }
+
+        universidades_publicas.append(universidad_info)
 
     # Devuelve los datos en un diccionario
     data = {
         'link': link,
-        # Agrega más datos según sea necesario
+        'universidades_publicas': universidades_publicas
+        # Puedes agregar más datos según sea necesario
     }
-
+    print(data)
     return data
 
 def save_to_mongo(data):
