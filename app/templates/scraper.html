@@ -31,6 +31,14 @@
     button:hover {
         background-color: #0056b3;
     }
+
+    .results-container {
+        margin-top: 30px;
+    }
+
+    .result-item {
+        margin-bottom: 10px;
+    }
 </style>
 
 <div class="form-container">
@@ -42,5 +50,16 @@
         <button type="submit">Scrapear</button>
     </form>
 </div>
+
+{% if data %}
+<div class="results-container">
+    <h2>Resultados de la Jornada 1</h2>
+    {% for result in data.jornada_1_results %}
+    <div class="result-item">
+        <p>{{ result.equipo_local }} {{ result.resultado }} {{ result.equipo_visitante }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 
 {% endblock %}
